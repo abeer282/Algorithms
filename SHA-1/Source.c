@@ -17,5 +17,6 @@ int main() {
 	printf("Hash: %s\n", myPlainText);
 
 	getchar();
+	getchar();
 	return 0;
 }
