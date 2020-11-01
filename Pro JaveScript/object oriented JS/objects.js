@@ -16,3 +16,17 @@ system.boot()
 system.users = 4
 //adding property
 system.admins = 2
+
+
+/***class***/
+
+//constructor
+function Program() {};
+//creating obj
+var chrome = new Program();
+//check const:
+chrome.constructor === Program; //true
+chrome instanceof Program; //true
+//const maps to func directly
+var firefox = new chrome.constructor(); 
+firefox instanceof Program; //true
