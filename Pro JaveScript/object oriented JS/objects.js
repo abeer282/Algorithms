@@ -30,3 +30,8 @@ chrome instanceof Program; //true
 //const maps to func directly
 var firefox = new chrome.constructor(); 
 firefox instanceof Program; //true
+
+//assign properties and methods (with prototype)
+Program.prototype.tabs = 1;
+Program.prototype.users = 1;
+Program.prototype.needsAdmin = false;
