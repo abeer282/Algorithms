@@ -54,5 +54,31 @@ stam();
 console.log(globalVar); //"Changed inside function stam"
 console.log(localVar); //Error: localVar is not defined
 
+//context of a function := the object encapsulating the function when it’s run.
+this === window //true
+
+var stam = { amistam: function() {
+                                return this === stam 
+                       }
+           }
+stam.amistam() //true
 
 
+var funny = {
+    isfunny: false,
+    joke: function() {
+        var that = this;
+        this.isfunny = true;
+        function stam() {//function within object take on the global window
+            alert(this === funny) //false
+            alert(this === window) //true
+            alert(that === funny) //true
+            that.isfunny = false;//overwrites funny.isfunny
+        }
+        stam();
+    }//joke end
+};//funny end
+
+
+funny.joke(); // false true true
+funn
