@@ -54,7 +54,7 @@ stam();
 console.log(globalVar); //"Changed inside function stam"
 console.log(localVar); //Error: localVar is not defined
 
-//context of a function := the object encapsulating the function when it’s run.
+//context of a function := the object encapsulating the function when it’s run. 7
 this === window //true
 
 var stam = { amistam: function() {
@@ -81,4 +81,24 @@ var funny = {
 
 
 funny.joke(); // false true true
-funn
+
+
+// assigning methods and properties via prototype and this
+function Animal() {
+    this.legs = 4;
+    this.roar = false;
+}
+Animal.prototype.sound = function() {
+    this.roar = true;
+}
+Animal.prototype.mute = function() {
+    this.roar = false;
+}
+
+//instantiate Animal 
+var lion =  new Animal(); // Animal {legs:4, roar:false}
+lion.sound() // roar = true
+lion.roar // true
+
+
+
