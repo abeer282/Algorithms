@@ -100,5 +100,11 @@ var lion =  new Animal(); // Animal {legs:4, roar:false}
 lion.sound() // roar = true
 lion.roar // true
 
+// parametrized cons
 
-
+function Vehicle(wheels, color, chairs) {
+    this.wheels = wheels || 2;
+    this.color = color || "red";
+    this.chairs = chairs || 1;
+}
+var van = new Vehicle(4, "blue", 6);
