@@ -1,39 +1,73 @@
 <template>
   <div id="app">
-    <h1>Template Interpolation</h1>
-    <div>
-      <p>I am a simple paragraph!</p>
-      <p>first name: {{firstName}}</p>
-      <p>last name: {{lastName}}</p>
-      <p>full name: {{fullName}}</p>
-      <pre>
-        {{complexObject}}
-      </pre>
-      <a v-bind:href="packtLink">Packt</a>
-      <img :src="imageURL" alt="">
+    <h1>Vue Directives</h1>
+    <div class="auth-status">
+      <h2>v-if</h2>
+      <div class="logged-in" v-if="loggedIn">
+        <p>You are logged in!</p>
+      </div>
+      <div class="logged-out" v-else>
+        <p>You are logged out, please <button v-on:click="login">Login</button></p>
+      </div>
+    </div>
+    <div class="shopping-list" v-show="loggedIn">
+      <h2>v-for</h2>
+      <ul>
+        <li v-for="(item, index) in shoppingList" v-bind:key="index">
+          {{item}}
+        </li>
+      </ul>
+    </div>
+    <div class="custom" v-if="custom">
+      <h2>Custom Directives</h2>
+      <div class="box" v-flee></div>
     </div>
   </div>
 </template>
-
 <script>
+import Vue from 'vue';
+
+Vue.directive('flee', {
+  inserted: function (el) {
+    var count=0;
+    var moveDistance = '150px';
+    el.innerText = 'Catch me!';
+    el.addEventListener("mouseover", () => {
+      if(count > 9){
+        el.innerText = ':P';
+      }
+      count++;
+      el.style.position = 'relative';
+      if(el.style.left === moveDistance){
+        el.style.left = '0px';
+      } else {
+        el.style.left = moveDistance;
+      }
+      if(Math.round(Math.random()) == 1){
+        el.style.top = moveDistance;
+      } else {
+        el.style.top = '0px';
+      }
+    });
+  }
+});
+
 export default {
   name: 'app',
   data(){
     return {
-      firstName: `Jonathan`,
-      lastName: 'Hethey',
-      packtLink: 'http://packtpub.com',
-      imageURL: 'https://images.unsplash.com/photo-1452621946466-c0f2ff2ff100?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1930186cc3dd91db75f7c540bb70964d&auto=format&fit=crop&w=1000&q=60',
-      complexObject: {
-        id: 1,
-        enabled: false,
-        relatedItems: [2,51,31,27,96]
-      }
+      loggedIn: false,
+      shoppingList: [
+        'Milk',
+        'Toast',
+        'Honey'
+      ],
+      custom: true
     }
   },
-  computed: {
-    fullName(){
-      return this.firstName + ' ' + this.lastName
+  methods: {
+    login() {
+      this.loggedIn = true;
     }
   }
 }
@@ -50,12 +84,12 @@ export default {
   margin: 60px auto;
 }
 
-h1 {
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #42b983;
+  color: white;
+  line-height: 100px;
   text-align: center;
 }
-
-img {
-  max-width: 100%;
-}
-
 </style>
